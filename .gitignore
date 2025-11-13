@@ -1,0 +1,20 @@
+
+#Fichiers spécifiques a l'ide Eclipse 
+.settings/ 
+.project 
+.classpath
+
+# Fichiers de complation java
+/bin/
+*.class
+*.jar
+*.war
+
+#données locales ou temporaires
+*~
+*.log
+
+#Au cas ouon on utilisara une base de données
+*.db
+
+.metadata/
