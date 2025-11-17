@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import g13.Antecedants;
-import Medipass.Consultation;
+import MediPass.Consultation;
 
 public class Patient extends Utilisateur {
 
