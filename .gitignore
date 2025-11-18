@@ -14,7 +14,7 @@
 *~
 *.log
 
-#Au cas ouon on utilisara une base de données
+#Au cas ou on on utilisara une base de données
 *.db
 
 .metadata/

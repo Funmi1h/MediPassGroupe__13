@@ -10,7 +10,7 @@ public class Administrateur extends Utilisateur {
 	
 	private Scanner scanner = new Scanner(System.in);
 
-    // Déclaration et initialisation des droits
+    // DÃ©claration et initialisation des droits
     private Set<Droit> droitAcces = new HashSet<>() ;{{
     	droitAcces.add(Droit.CREER_COMPTE_PROFESSIONNEL);
     	droitAcces.add(Droit.MODIFIER_COMPTE_PROFESSIONNEL);
@@ -22,16 +22,16 @@ public class Administrateur extends Utilisateur {
         super();
     }
 
-    // Redéfinition de aDroit pour utiliser le Set local
+    // Redï¿½finition de aDroit pour utiliser le Set local
    
     public boolean aDroit(Droit droitRequis) {
         return droitAcces.contains(droitRequis);
     }
 
-    // Création d'un compte professionnel
+    // CrÃ©ation d'un compte professionnel
     public void creerCompteProfessionnel(Set<Utilisateur> baseUtilisateurs) {
         if (!aDroit(Droit.CREER_COMPTE_PROFESSIONNEL)) {
-            System.out.println("Vous n'avez pas le droit de créer un compte professionnel !");
+            System.out.println("Vous n'avez pas le droit de crÃ©er un compte professionnel !");
             return;
         }
 
@@ -40,7 +40,7 @@ public class Administrateur extends Utilisateur {
         String id=scanner.nextLine();
         System.out.print("Nom : ");
         String nom=scanner.nextLine();
-        System.out.print("Prénom : ");
+        System.out.print("Prï¿½nom : ");
         String prenom=scanner.nextLine();
         String role=scanner.nextLine();
         System.out.print("role : ");
@@ -51,7 +51,7 @@ public class Administrateur extends Utilisateur {
         nouveauPro.hashMotDePasse(motDePasse);
 
         baseUtilisateurs.add(nouveauPro);
-        System.out.println("Compte professionnel créé (nom/prénom non définis) !");
+        System.out.println("Compte professionnel crï¿½ï¿½ (nom/prï¿½nom non dï¿½finis) !");
     }
 
     // Modification d'un compte professionnel
@@ -66,7 +66,7 @@ public class Administrateur extends Utilisateur {
          String id=scanner.nextLine(); 
         System.out.print("Nouveau nom : ");
         String nom=scanner.nextLine();
-        System.out.print("Nouveau prénom : ");
+        System.out.print("Nouveau prï¿½nom : ");
         String prenom=scanner.nextLine();
         String role=scanner.nextLine();
         System.out.print("role : ");
@@ -76,8 +76,8 @@ public class Administrateur extends Utilisateur {
 
         u.hashMotDePasse(newmotdepasse);
 
-        System.out.println("Le compte professionnel a été modifié avec succès !");
-        System.out.println("Attention : nom et prénom non modifiés (Utilisateur ne fournit pas de setters).");
+        System.out.println("Le compte professionnel a ï¿½tï¿½ modifiï¿½ avec succï¿½s !");
+        System.out.println("Attention : nom et prï¿½nom non modifiï¿½s (Utilisateur ne fournit pas de setters).");
     }
 
     // Suppression d'un compte professionnel
@@ -93,9 +93,9 @@ public class Administrateur extends Utilisateur {
 
         if (rep.equalsIgnoreCase("oui")) {
             baseUtilisateurs.remove(u);
-            System.out.println("Le compte professionnel a été supprimé avec succès !");
+            System.out.println("Le compte professionnel a ï¿½tï¿½ supprimï¿½ avec succï¿½s !");
         } else {
-            System.out.println("Suppression annulée.");
+            System.out.println("Suppression annulï¿½e.");
         }
     }
 
@@ -107,7 +107,7 @@ public class Administrateur extends Utilisateur {
         }
 
         System.out.println("SUSPENSION DU COMPTE PROFESSIONNEL");
-        System.out.println("Le compte professionnel a été suspendu .");
+        System.out.println("Le compte professionnel a Ã©tÃ© suspendu .");
     }
 }
 
