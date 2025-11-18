@@ -26,14 +26,6 @@ public class Patient extends Utilisateur {
             RoleConfig.getDroitsPourRole("PATIENT")
             );
     }
-/*Je ne suis pas sur que ce constructeur est bien (Héloise)
-	public Patient(String numeroDonne, int age, double taille, double poids) {
-        
-		this.numeroDonne = numeroDonne;
-		this.age = age;
-		this.taille = taille;
-		this.poids = poids;
-	}*/
     // Getters et Setters
 	public String getNumeroDonne() {
 		return numeroDonne;
