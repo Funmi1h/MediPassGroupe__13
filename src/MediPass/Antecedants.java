@@ -1,4 +1,4 @@
-package g13;
+package MediPass;
 
 public class Antecedants {
 	private int idAntecedants;

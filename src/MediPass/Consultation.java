@@ -1,4 +1,4 @@
-package Medipass;
+package MediPass;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,18 +25,18 @@ public class Consultation {
 	private LocalDateTime dateHeure;
 	private String motif;
 	private Patient patient;
-	private ProfesionelDeSante PDS;
+	private ProfessionnelSante PDS;
 	private statuts statut;
 	private List<String> observations;
 	 
 	
-	public Consultation(int IdConsultation, LocalDateTime dateHeure, String motif, Patient patient, ProfesionelDeSante PDS){
+	public Consultation(int IdConsultation, LocalDateTime dateHeure, String motif, Patient patient, ProfessionnelSante PDS){
 		this.IdConsultation = IdConsultation;
 		this.dateHeure = dateHeure;
 		this.motif = motif;
 		this.patient = patient;
 		this.PDS = PDS;
-		this.statut = statuts.PLANIFIEE; //Par défaut
+		this.statut = statuts.PLANIFIEE; //Par dÃ©faut
 		this.observations = new ArrayList<>(); 
 	}
 	
@@ -56,7 +56,7 @@ public class Consultation {
 		return this.patient;
 	}
 	
-	public ProfesionelDeSante getPDS() {
+	public ProfessionnelSante getPDS() {
 		return this.PDS;
 	}
 	
@@ -75,7 +75,7 @@ public class Consultation {
 		String obs = sc.nextLine();
 		if(!obs.isEmpty()){
 			observations.add(obs);
-			System.out.println("Observations ajoutée.")
+			System.out.println("Observations ajoutÃ©e.");
 		}
 		else {
 			System.out.println("Aucune observation.");
@@ -86,7 +86,7 @@ public class Consultation {
 	public void modifierstatut(statuts Nstatut){
 		if (Nstatut != null){
 			this.statut = Nstatut;
-			System.out.println("Statut mis à jour: " + this.statut);
+			System.out.println("Statut mis Ã  jour: " + this.statut);
 		}
 	}
 	
@@ -94,7 +94,7 @@ public class Consultation {
 	public void modifiermotif(String Nmotif){
 		if(Nmotif != null && !Nmotif.isEmpty()){
 			this.motif = Nmotif;
-			System.out.println("Motif modifié avec succès.");
+			System.out.println("Motif modifiÃ© avec succÃ¨s.");
 		}
 		
 	}

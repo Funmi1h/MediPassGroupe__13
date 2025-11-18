@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import java.util.Scanner;
+import java.lang;
 
 public class Administrateur extends Utilisateur {
 	
@@ -17,12 +18,14 @@ public class Administrateur extends Utilisateur {
     	droitAcces.add(Droit.SUSPENDRE_COMPTE_PROFESSIONNEL);
     	droitAcces.add(Droit.SUPPRIMER_COMPTE_PROFESSIONNEL);
     }};
-
-    public Administrateur() {
+/* A revoir 
+ *  public Administrateur() {
         super();
     }
+*/
+   
 
-    // Red�finition de aDroit pour utiliser le Set local
+    // Redéfinition de aDroit pour utiliser le Set local
    
     public boolean aDroit(Droit droitRequis) {
         return droitAcces.contains(droitRequis);
@@ -40,14 +43,14 @@ public class Administrateur extends Utilisateur {
         String id=scanner.nextLine();
         System.out.print("Nom : ");
         String nom=scanner.nextLine();
-        System.out.print("Pr�nom : ");
+        System.out.print("Prénom : ");
         String prenom=scanner.nextLine();
         String role=scanner.nextLine();
         System.out.print("role : ");
         System.out.print("Mot de passe : ");
         String motDePasse = scanner.nextLine();
 
-        Utilisateur nouveauPro = new professionneldesante();
+        Utilisateur nouveauPro = new ProfessionnelSante(String nom, String p, char[] mdp, String specialite);
         nouveauPro.hashMotDePasse(motDePasse);
 
         baseUtilisateurs.add(nouveauPro);
