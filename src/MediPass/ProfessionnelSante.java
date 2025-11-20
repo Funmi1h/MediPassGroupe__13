@@ -35,13 +35,14 @@ public class ProfessionnelSante extends Utilisateur {
 		}
 
 
-		public Patient creerPatient(String nom, String prenom, char[] mdp){
+		public Patient creerPatient(String nom, String prenom, char[] mdpInitial){
 			if(!this.aDroit(Droit.CREER_COMPTE_PATIENT)){
-				System.err.println("******Errer: Vous n'avez pas le droit de créer un patient. ******\n");
+				System.err.println("****** Erreur: Vous n'avez pas le droit de créer un patient. ******\n");
 				return null;
 			}
-			Patient nouveauPatient = new Patient(nom, prenom, mdp);
+			Patient nouveauPatient = new Patient(nom, prenom, mdpInitial);
 
+			// Enregistrer le patient dans le base de données
 			return nouveauPatient;
 
 		}
