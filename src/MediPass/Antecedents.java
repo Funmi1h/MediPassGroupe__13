@@ -1,21 +1,21 @@
 package g13;
 
-public class Antecedants {
-	private int idAntecedants;
-	private  String type;
+public class Antecedents {
+	private int idAntecedents;
+	private String type;
 	private String description;
 	private boolean estConnecte;
 	private boolean estMalade;
 	
-	public Antecedants(final int idAntecedants,final String type,final String description,final boolean estConnecte,final boolean estMalade) {
-		this.idAntecedants=idAntecedants;
+	public Antecedents(final int idAntecedents,final String type,final String description,final boolean estConnecte,final boolean estMalade) {
+		this.idAntecedents=idAntecedents;
 		this.type=type;
 		this.description=description;
 		this.estConnecte=estConnecte;
 		this.estMalade=estMalade;
 	}
-	public int getIdAntecedants() {
-		return idAntecedants;
+	public int getIdAntecedents() {
+		return idAntecedents;
 	}
 	public String getType() {
 		return type;
@@ -30,8 +30,8 @@ public class Antecedants {
 		return estMalade; 
 	}
 	
-	public void setIdAntecedants(int idAntecedants) {
-		this.idAntecedants=idAntecedants;
+	public void setIdAntecedents(int idAntecedents) {
+		this.idAntecedents=idAntecedents;
 	}
 	
 	public void setType(String type) {
@@ -52,7 +52,7 @@ public class Antecedants {
 		String message;
 		if(estConnecte) {
 			 // System.out.println();
-			  message="Voici votre antecedants: \n" + "id Antecedants- " + this.idAntecedants +"\n" + "Type -" + this.type +"\n" + "Description- " + this.description;
+			  message="Voici votre antecedents: \n" + "id Antecedents- " + this.idAntecedents +"\n" + "Type -" + this.type +"\n" + "Description- " + this.description;
 		}
 		else {
 			//System.out.println("Connectez vous d'abord");
