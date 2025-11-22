@@ -9,7 +9,7 @@ import MediPass.Consultation;
 public class Patient extends Utilisateur {
     
     private int idDossier;
-	private String numeroDonne;
+	private String numeroDossier;
 	private int age;
 	private double taille;
 	private double poids;
@@ -26,21 +26,14 @@ public class Patient extends Utilisateur {
             RoleConfig.getDroitsPourRole("PATIENT")
             );
     }
-/*Je ne suis pas sur que ce constructeur est bien (Héloise)
-	public Patient(String numeroDonne, int age, double taille, double poids) {
-        
-		this.numeroDonne = numeroDonne;
-		this.age = age;
-		this.taille = taille;
-		this.poids = poids;
-	}*/
-    // Getters et Setters
-	public String getNumeroDonne() {
-		return numeroDonne;
+
+	// Getters et Setters
+	public String getNumeroDossier() {
+		return numeroDossier;
 	}
 
-	public void setNumeroDonne(String numeroDonne) {
-		this.numeroDonne = numeroDonne;
+	public void setNumeroDossier(String numeroDossier) {
+		this.numeroDossier = numeroDossier;
 	}
 
 	public int getAge() {
@@ -109,7 +102,7 @@ public class Patient extends Utilisateur {
 	public String ConsulterDossier() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Dossier Patient:\n");
-		sb.append("Numero: ").append(numeroDonne).append("\n");
+		sb.append("Numero: ").append(numeroDossier).append("\n");
 		sb.append("Age: ").append(age).append("\n");
 		sb.append("Taille: ").append(taille).append("\n");
 		sb.append("Poids: ").append(poids).append("\n");
@@ -127,7 +120,7 @@ public class Patient extends Utilisateur {
 
 	@Override
 	public String toString() {
-		return "Patient [numeroDonne=" + numeroDonne + ", age=" + age + ", taille=" + taille + ", poids=" + poids + "]";
+		return "Patient [numeroDossier=" + numeroDossier + ", age=" + age + ", taille=" + taille + ", poids=" + poids + "]";
 	}
 
 }
