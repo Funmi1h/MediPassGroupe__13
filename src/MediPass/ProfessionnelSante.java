@@ -53,27 +53,28 @@ public class ProfessionnelSante extends Utilisateur {
 				
 				}
 			//Logique pour rechercher quelque chose dans la base de données avec les parametres nom et prenom 
-			Patient patient; 
+			Patient patient = null; 
 
 				
 			return patient ;
 
 		}
 
-		public DossierModicalM creerDossierMedical(){
+		public DossierMedical creerDossierMedical(){
 			if(!aDroit(Droit.CREER_DOSSIER_MEDICAL)){
 				System.err.println("\t ****** Erreur vous ne pouvez créer de dossier médical ");
 
 			}
 			//Prendre des infos du constructeur de DossierMedical 
 			//créer un nouveau dossier l'enregistrer dans la base de donnees et le return
+			return null;
 
 
 		}
 
 		public void  consulterDossierMedical(
 
-		
+
 		){
 
 		}

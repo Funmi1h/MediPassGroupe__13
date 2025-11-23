@@ -1,115 +1,177 @@
 package MediPass;
 
 import java.util.HashSet;
-
 import java.util.Set;
-
 import java.util.Scanner;
 
-public class Administrateur extends Utilisateur {
-	
-	private Scanner scanner = new Scanner(System.in);
 
-    // Déclaration et initialisation des droits
-    private Set<Droit> droitAcces = new HashSet<>() ;{{
-    	droitAcces.add(Droit.CREER_COMPTE_PROFESSIONNEL);
-    	droitAcces.add(Droit.MODIFIER_COMPTE_PROFESSIONNEL);
-    	droitAcces.add(Droit.SUSPENDRE_COMPTE_PROFESSIONNEL);
-    	droitAcces.add(Droit.SUPPRIMER_COMPTE_PROFESSIONNEL);
-    }};
-/* A revoir 
- *  public Administrateur() {
-        super();
-    }
-*/
-   
 
-    // Redéfinition de aDroit pour utiliser le Set local
-   
-    public boolean aDroit(Droit droitRequis) {
-        return droitAcces.contains(droitRequis);
-    }
 
-    // Création d'un compte professionnel
-    public void creerCompteProfessionnel(Set<Utilisateur> baseUtilisateurs) {
-        if (!aDroit(Droit.CREER_COMPTE_PROFESSIONNEL)) {
-            System.out.println("Vous n'avez pas le droit de créer un compte professionnel !");
-             return;
-        }
 
-        System.out.println(" CREATION D'UN COMPTE PROFESSIONNEL");
-        System.out.print("id : ");
-        String id=scanner.nextLine();
-        System.out.print("Nom : ");
-        String nom=scanner.nextLine();
-        System.out.print("Prénom : ");
-        String prenom=scanner.nextLine();
-        String role=scanner.nextLine();
-        System.out.print("role : ");
-        System.out.print("Mot de passe : ");
-        String motDePasse = scanner.nextLine();
 
-        Utilisateur nouveauPro = new ProfessionnelSante(String nom, String p, char[] mdp, String specialite);
-        nouveauPro.hashMotDePasse(motDePasse);
+ public class Administrateur extends Utilisateur {
+	  private Scanner scanner = new Scanner(System.in);
+	  
+	    private Set<Utilisateur> utilisateurs = new HashSet<>();
+	    protected Set<Droit> droitAcces = new HashSet<>();
 
-        baseUtilisateurs.add(nouveauPro);
-        System.out.println("Compte professionnel cr�� (nom/pr�nom non d�finis) !");
-    }
+	    // Constructeur
+	    public Administrateur(String nom, String prenom, char[] mdp) {
+	        super(nom, prenom, "ADMIN", mdp, new HashSet<>());
 
-    // Modification d'un compte professionnel
-    public void modifierCompteProfessionnel(Utilisateur u) {
-        if (!aDroit(Droit.MODIFIER_COMPTE_PROFESSIONNEL)) {
-            System.out.println("Vous n'avez pas le droit de modifier ce compte professionnel !");
-            return;
-        }
+	        // Droits par d�faut
+	        droitAcces.add(Droit.CREER_COMPTE_PROFESSIONNEL);
+	        droitAcces.add(Droit.MODIFIER_COMPTE_PROFESSIONNEL);
+	        droitAcces.add(Droit.SUSPENDRE_COMPTE_PROFESSIONNEL);
+	        droitAcces.add(Droit.SUPPRIMER_COMPTE_PROFESSIONNEL);
+	    }
 
-        System.out.println(" MODIFICATION DU COMPTE PROFESSIONNEL");
-        System.out.print("id : ");
-         String id=scanner.nextLine(); 
-        System.out.print("Nouveau nom : ");
-        String nom=scanner.nextLine();
-        System.out.print("Nouveau pr�nom : ");
-        String prenom=scanner.nextLine();
-        String role=scanner.nextLine();
-        System.out.print("role : ");
-        System.out.print("Nouveau mot de passe : ");
-        String newmotdepasse = scanner.nextLine();
-        
+	    public void ajouterUtilisateur(Utilisateur u) {
+	        utilisateurs.add(u);
+	    }
 
-        u.hashMotDePasse(newmotdepasse);
+	    public boolean aDroit(Droit droitRequis) {
+	        return droitAcces.contains(droitRequis);
+	    }
 
-        System.out.println("Le compte professionnel a �t� modifi� avec succ�s !");
-        System.out.println("Attention : nom et pr�nom non modifi�s (Utilisateur ne fournit pas de setters).");
-    }
+	  //creatin de compte professionnel
+	    public void creerCompteProfessionnel() {
+	        if (!aDroit(Droit.CREER_COMPTE_PROFESSIONNEL)) {
+	            System.out.println("Vous n'avez pas le droit.");
+	            return;
+	        }
 
-    // Suppression d'un compte professionnel
-    public void supprimerCompteProfessionnel(Utilisateur u, Set<Utilisateur> baseUtilisateurs) {
-        if (!aDroit(Droit.SUPPRIMER_COMPTE_PROFESSIONNEL)) {
-            System.out.println("Vous n'avez pas le droit de supprimer ce compte professionnel !");
-            return;
-        }
+	        System.out.println("CREATION D'UN PROFESSIONNEL");
 
-        System.out.println("SUPPRESSION DU COMPTE PROFESSIONNEL");
-        System.out.print("Voulez-vous vraiment supprimer ce compte ? (oui/non) : ");
-        String rep = scanner.nextLine();
+	        String nom = saisirNomOuPrenom("Nom : ");
+	        String prenom = saisirNomOuPrenom("Pr�nom : ");
+	        char[] mdp = saisirMotDePasse("Mot de passe : ");
+	        String specialite = saisirNomOuPrenom("Sp�cialit� : ");
 
-        if (rep.equalsIgnoreCase("oui")) {
-            baseUtilisateurs.remove(u);
-            System.out.println("Le compte professionnel a �t� supprim� avec succ�s !");
-        } else {
-            System.out.println("Suppression annul�e.");
-        }
-    }
+	        ProfessionnelSante pro = new ProfessionnelSante(nom, prenom, mdp, specialite);
+	        utilisateurs.add(pro);
+	        System.out.println("Compte cr��. ID = " + pro.getIdUtilisateur());
+	    }
 
-    // Suspension d'un compte professionnel
-    public void suspendreCompteProfessionnel(Utilisateur u) {
-        if (!aDroit(Droit.SUSPENDRE_COMPTE_PROFESSIONNEL)) {
-            System.out.println("Vous n'avez pas le droit de suspendre ce compte professionnel !");
-            return;
-        }
+	   //modification de compte professionnel
+	    public void modifierCompteProfessionnel() {
+	        if (!aDroit(Droit.MODIFIER_COMPTE_PROFESSIONNEL)) {
+	            System.out.println("Vous n'avez pas le droit.");
+	            return;
+	        }
 
-        System.out.println("SUSPENSION DU COMPTE PROFESSIONNEL");
-        System.out.println("Le compte professionnel a été suspendu .");
-    }
-}
+	        System.out.println(" MODIFICATION ");
 
+	        String id = saisirChampObligatoire("ID du compte : ");
+	        Utilisateur user = trouverUtilisateur(id);
+
+	        if (user == null) {
+	            System.out.println("Introuvable.");
+	            return;
+	        }
+
+	        String newNom = saisirNomOuPrenom("Nouveau nom : ");
+	        String newPrenom = saisirNomOuPrenom("Nouveau pr�nom : ");
+
+	        try {
+	            java.lang.reflect.Field nomField = Utilisateur.class.getDeclaredField("nom");
+	            java.lang.reflect.Field prenomField = Utilisateur.class.getDeclaredField("prenom");
+	            nomField.setAccessible(true);
+	            prenomField.setAccessible(true);
+
+	            nomField.set(user, newNom);
+	            prenomField.set(user, newPrenom);
+	        } catch (Exception e) {
+	            System.out.println("Erreur lors de la modification : " + e.getMessage());
+	            return;
+	        }
+
+	       
+	        System.out.println("Modifi� avec succ�s.");
+	    }
+
+	    //supprimercompte
+	    public void supprimerCompteProfessionnel() {
+	        if (!aDroit(Droit.SUPPRIMER_COMPTE_PROFESSIONNEL)) {
+	            System.out.println("Interdit.");
+	            return;
+	        }
+
+	        System.out.println(" SUPPRESSION ");
+
+	        String id = saisirChampObligatoire("ID : ");
+	        Utilisateur u = trouverUtilisateur(id);
+
+	        if (u == null) {
+	            System.out.println("Introuvable.");
+	            return;
+	        }
+
+	        utilisateurs.remove(u);
+	        System.out.println("Supprim� avec succ�s.");
+	    }
+
+	   //suspendre compte
+	    public void suspendreCompteProfessionnel() {
+	        if (!aDroit(Droit.SUSPENDRE_COMPTE_PROFESSIONNEL)) {
+	            System.out.println("Interdit.");
+	            return;
+	        }
+
+	        System.out.println("=== SUSPENSION ===");
+
+	        String id = saisirChampObligatoire("ID : ");
+	        Utilisateur u = trouverUtilisateur(id);
+
+	        if (u == null) {
+	            System.out.println("Introuvable.");
+	            return;
+	        }
+
+	        System.out.println("Compte suspendu (simulation).");
+	    }
+
+	   
+	    private String saisirNomOuPrenom(String message) {
+	        while (true) {
+	            System.out.print(message);
+	            String saisie = scanner.nextLine().trim();
+	            if (saisie.isEmpty()) {
+	                System.out.println("Erreur : le champ ne peut pas �tre vide.");
+	                continue;
+	            }
+	            if (saisie.matches("[0-9]+")) {
+	                System.out.println("Erreur : le champ ne peut pas �tre un nombre.");
+	                continue;
+	            }
+	            return saisie;
+	        }
+	    }
+
+	    private char[] saisirMotDePasse(String message) {
+	        while (true) {
+	            System.out.print(message);
+	            String saisie = scanner.nextLine();
+	            if (!saisie.isEmpty()) {
+	                return saisie.toCharArray();
+	            }
+	            System.out.println("Erreur : mot de passe vide.");
+	        }
+	    }
+
+	    private String saisirChampObligatoire(String message) {
+	        while (true) {
+	            System.out.print(message);
+	            String s = scanner.nextLine().trim();
+	            if (!s.isEmpty()) return s;
+	            System.out.println("Erreur : ce champ est obligatoire.");
+	        }
+	    }
+
+	    private Utilisateur trouverUtilisateur(String id) {
+	        for (Utilisateur u : utilisateurs) {
+	            if (u.getIdUtilisateur().equals(id)) return u;
+	        }
+	        return null;
+	    }
+	}	  		

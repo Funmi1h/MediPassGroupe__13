@@ -1,14 +1,56 @@
 package MediPass;
+import java.sql.Connection;
+import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
+		Connection conn = SQLiteManager.connect();
+		 
+	Scanner scanner = new Scanner(System.in);
 
-		String mdpMedecinA = "123";
-		char[] mdpA = mdpMedecinA.toCharArray();
+	        // 1️ Créer l'administrateur
+	        char[] mdpAdmin = {'1','2','3','4'};
+	        Administrateur admin = new Administrateur ("Adebiaye", "Ronice", mdpAdmin);
 
-		ProfessionnelSante medecinA  = new ProfessionnelSante("ASSOGBA", "Louis", mdpA, "Géneraliste");
-		System.out.println("Le médécin A est créé");
+	         boolean quitter = false;
+
+	        while (!quitter) {
+	            System.out.println("\n===== MENU ADMINISTRATEUR =====");
+	            System.out.println("1 - Créer un compte professionnel");
+	            System.out.println("2 - Modifier un compte professionnel");
+	            System.out.println("3 - Supprimer un compte professionnel");
+	            System.out.println("4 - Suspendre un compte professionnel");
+	            System.out.println("5 - Quitter");
+	            System.out.print("Choisissez une option : ");
+
+	            String choix = scanner.nextLine();
+
+	            switch (choix) {
+	                case "1":
+	                    admin.creerCompteProfessionnel();
+	                    break;
+	                case "2":
+	                    admin.modifierCompteProfessionnel(); 
+	                    break;
+	                case "3":
+	                    admin.supprimerCompteProfessionnel(); 
+	                    break;
+	                case "4":
+	                    admin.suspendreCompteProfessionnel(); 
+	                    break;
+	                case "5":
+	                    System.out.println("Au revoir !");
+	                    quitter = true;
+	                    break;
+	                default:
+	                    System.out.println("Option invalide !");
+	            }
+	        }
+
+	        scanner.close();
+			SQLiteManager.closeConnection(conn);
+	    }
+		
 	}
 
-}

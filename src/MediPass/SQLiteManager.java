@@ -12,28 +12,28 @@ public class SQLiteManager {
     private static final String URL = "jdbc:sqlite:data/mediPass.db";
 
     public static Connection  connect(){
+
+        
         Connection conn =  null;
         try{
+            try {
+                Class.forName("org.sqlite.JDBC");
+            } catch (ClassNotFoundException e) {
+                System.err.println("Driver SQLite introuvable : vérifiez le JAR dans lib/");
+                e.printStackTrace();
+            }
+           
             conn = DriverManager.getConnection(URL);
             System.out.println("Connexion a SQLite 🆗🆗!");
 
         }catch (SQLException ex){
             System.err.println("❌❌ Erreur de connexion à la base de données ❌❌");
             System.out.println(ex.getMessage());
-        }finally {
-            try{
-                if(conn != null){
-                    conn.close();
-                }
-
-            }catch(SQLException ex){
-                System.out.println(ex.getMessage());
-
-            }
         }
         return conn;
         
     }
+    
 
    
     public static Connection closeConnection(Connection conn){
@@ -60,13 +60,7 @@ public class SQLiteManager {
         + "doitChangerMdp INTEGER DEFAULT 1"
         + ");";
 
-        try {
-            Connection conn = connect();
-            
-            
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        Connection conn = connect();
 
     }
    

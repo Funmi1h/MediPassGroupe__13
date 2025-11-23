@@ -3,7 +3,7 @@ package MediPass;
 import java.util.ArrayList;
 import java.util.List;
 
-import MediPass.Antecedants;
+import MediPass.Antecedents;
 import MediPass.Consultation;
 
 public class Patient extends Utilisateur {
@@ -15,7 +15,7 @@ public class Patient extends Utilisateur {
 	private double poids;
 
 	private List<Consultation> consultations = new ArrayList<>();
-	private List<Antecedants> antecedents = new ArrayList<>();
+	private List<Antecedents> antecedents = new ArrayList<>();
         //Constructeurs
 	public Patient (String n, String p, char[]mdp){
         super(
@@ -64,11 +64,11 @@ public class Patient extends Utilisateur {
 		return consultations;
 	}
 
-	public List<Antecedants> getAntecedents() {
+	public List<Antecedents> getAntecedents() {
 		return antecedents;
 	}
     // Relation: ajouter un antécédent pour ce patient
-	public void ajouterAntecedent(Antecedants a) {
+	public void ajouterAntecedent(Antecedents a) {
 		if (a != null) {
 			antecedents.add(a);
 		}
@@ -110,7 +110,7 @@ public class Patient extends Utilisateur {
 		if (antecedents.isEmpty()) {
 			sb.append("  Aucun antécédent enregistré.\n");
 		} else {
-			for (Antecedants a : antecedents) {
+			for (Antecedents a : antecedents) {
 				sb.append("  - ").append(a.getType()).append(": ")
 				  .append(a.getDescription()).append("\n");
 			}
