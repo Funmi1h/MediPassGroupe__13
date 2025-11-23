@@ -75,14 +75,14 @@ public class Patient extends Utilisateur {
 	}
 
 	// Relation: ajouter une consultation pour ce patient
-	public void Faire_des_consultations(Consultation consultation) {
+	public void faire_des_consultations(Consultation consultation) {
 		if (consultation != null) {
 			consultations.add(consultation);
 		}
 	}
 
 	// Retourne l'historique des consultations sous forme de texte
-	public String ConsulterHistoriqueConsultation() {
+	public String consulterHistoriqueConsultation() {
 		StringBuilder sb = new StringBuilder();
 		if (consultations.isEmpty()) {
 			sb.append("Aucune consultation pour ce patient.\n");

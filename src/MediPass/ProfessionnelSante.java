@@ -37,7 +37,7 @@ public class ProfessionnelSante extends Utilisateur {
 
 		public Patient creerPatient(String nom, String prenom, char[] mdpInitial){
 			if(!this.aDroit(Droit.CREER_COMPTE_PATIENT)){
-				System.err.println("****** Erreur: Vous n'avez pas le droit de créer un patient. ******\n");
+				System.err.println("\t ****** Erreur: Vous n'avez pas le droit de créer un patient. ******\n");
 				return null;
 			}
 			Patient nouveauPatient = new Patient(nom, prenom, mdpInitial);
@@ -47,19 +47,49 @@ public class ProfessionnelSante extends Utilisateur {
 
 		}
 
-		public void rechercherPatient(){
+		public Patient rechercherPatient(String nom, String prenom){
+			if(!aDroit(Droit.RECHERCHER_PATIENT)){
+				System.err.println();
+				
+				}
+			//Logique pour rechercher quelque chose dans la base de données avec les parametres nom et prenom 
+			Patient patient; 
+
+				
+			return patient ;
 
 		}
 
-		public void creerDossierMedical(){
+		public DossierModicalM creerDossierMedical(){
+			if(!aDroit(Droit.CREER_DOSSIER_MEDICAL)){
+				System.err.println("\t ****** Erreur vous ne pouvez créer de dossier médical ");
+
+			}
+			//Prendre des infos du constructeur de DossierMedical 
+			//créer un nouveau dossier l'enregistrer dans la base de donnees et le return
+
 
 		}
 
-		public void  consulterDossierMedical(){
+		public void  consulterDossierMedical(
+
+		
+		){
+
+		}
+		public void programmerConsultation(){
+			
+		}
+
+		public  void  enregistrerAntecedents (){
 
 		}
 
 		public void enregistrerConsultation(){
 			
+		}
+
+		public String getSpecialite(){
+			return specialite;
 		}
 }

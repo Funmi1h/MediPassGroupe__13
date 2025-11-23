@@ -96,6 +96,7 @@ public abstract class Utilisateur {
 			// vérifier si c'est la premiere connexion et le forcer a changer si c'est le cas 
 			if(doitChangerMdp == true){
 				System.out.println("\t C'est votre première connexion: vous devez créer un nouveau mot de passe. \n ");
+				changerMotPasse();
 			}
 		}else {
 			System.out.println("❌❌❌ Vos identifiants sont incorrects ! ❌❌❌");			
