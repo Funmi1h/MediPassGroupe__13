@@ -50,18 +50,32 @@ public class SQLiteManager {
     }
 
 
-    public static void creerTableUtilisateur(){
-        String sql = "CREATE TABLE IF NOT EXISTS Utilisateur("
-        + "idUtilisateur INTEGER PRIMARY KEY, "
+    public static void initialiserBaseDeDonnees(){
+        String sqlUtilisateur  = "CREATE TABLE IF NOT EXISTS Utilisateur("
+        + "idUtilisateur TEXT PRIMARY KEY, "
         + "nom TEXT,"
         + "prenom TEXT, "
         + "role TEXT NOT NULL,"
         + "motDePasseHash TEXT NOT NULL,"
         + "doitChangerMdp INTEGER DEFAULT 1"
         + ");";
+        
+        String sqlPatient = "CREATE TABLE IF NOT EXISTS Patient ("
+        		+ "idUtilisateur TEXT PRIMARY KEY"
+        		+ "idDossier TEXT PRIMARY KEY"
+        		+ "age TEXT"
+        		+"taille REAL "
+        		+ "poids REAL"
+        		
+        		+")";
+        
+        String sqlAdministrateur = "CREATE TABLE IF NOT EXISTS PATIENT("
+        		+ "idUtilisateur TEXT PRIMARY KEY"
+        		+ ")";
 
         Connection conn = connect();
 
     }
+    
    
 }
