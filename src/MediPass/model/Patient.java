@@ -9,7 +9,6 @@ import MediPass.Consultation;
 public class Patient extends Utilisateur {
     
     private int idDossier;
-	private String numeroDossier;
 	private int age;
 	private double taille;
 	private double poids;
@@ -28,13 +27,8 @@ public class Patient extends Utilisateur {
     }
 
 	// Getters et Setters
-	public String getNumeroDossier() {
-		return numeroDossier;
-	}
+	
 
-	public void setNumeroDossier(String numeroDossier) {
-		this.numeroDossier = numeroDossier;
-	}
 
 	public int getAge() {
 		return age;
@@ -47,7 +41,9 @@ public class Patient extends Utilisateur {
 	public double getTaille() {
 		return taille;
 	}
-
+	public int  getIdDossier() {
+		return idDossier;
+	}
 	public void setTaille(double taille) {
 		this.taille = taille;
 	}
@@ -89,9 +85,9 @@ public class Patient extends Utilisateur {
 		} else {
 			sb.append("Historique des consultations:\n");
 			for (Consultation c : consultations) {
-				sb.append("- ID: ").append(c.getidConsultation())
-				  .append(" | Motif: ").append(c.getmotif())
-				  .append(" | Date: ").append(c.getdateHeure())
+				sb.append("- ID: ").append(c.getI1dConsultation())
+				  .append(" | Motif: ").append(c.getMotif())
+				  .append(" | Date: ").append(c.getDateHeure())
 				  .append("\n");
 			}
 		}
@@ -102,7 +98,7 @@ public class Patient extends Utilisateur {
 	public String ConsulterDossier() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Dossier Patient:\n");
-		sb.append("Numero: ").append(numeroDossier).append("\n");
+		sb.append("Numero: ").append(idDossier).append("\n");
 		sb.append("Age: ").append(age).append("\n");
 		sb.append("Taille: ").append(taille).append("\n");
 		sb.append("Poids: ").append(poids).append("\n");
@@ -120,7 +116,7 @@ public class Patient extends Utilisateur {
 
 	@Override
 	public String toString() {
-		return "Patient [numeroDossier=" + numeroDossier + ", age=" + age + ", taille=" + taille + ", poids=" + poids + "]";
+		return "Patient [numeroDossier=" + idDossier + ", age=" + age + ", taille=" + taille + ", poids=" + poids + "]";
 	}
 
 }

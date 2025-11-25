@@ -1,7 +1,16 @@
-package MediPass;
+package MediPass.model;
+
+import java.sql.SQLException;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+
+import MediPass.Droit;
+import MediPass.RoleConfig;
+import MediPass.Utilisateur;
+import services.ServiceStatistiques;
+
 import java.util.Scanner;
 
 
@@ -14,16 +23,12 @@ import java.util.Scanner;
 	  
 	    private Set<Utilisateur> utilisateurs = new HashSet<>();
 	    protected Set<Droit> droitAcces = new HashSet<>();
+	    
+	    private final ServiceStatistiques statsService = new ServiceStatistiques();
 
 	    // Constructeur
 	    public Administrateur(String nom, String prenom, char[] mdp) {
-	        super(nom, prenom, "ADMIN", mdp, new HashSet<>());
-
-	        // Droits par d�faut
-	        droitAcces.add(Droit.CREER_COMPTE_PROFESSIONNEL);
-	        droitAcces.add(Droit.MODIFIER_COMPTE_PROFESSIONNEL);
-	        droitAcces.add(Droit.SUSPENDRE_COMPTE_PROFESSIONNEL);
-	        droitAcces.add(Droit.SUPPRIMER_COMPTE_PROFESSIONNEL);
+	        super(nom, prenom, "ADMINISTRATEUR", mdp, RoleConfig.getDroitsPourRole("ADMINISTRATEUR"));
 	    }
 
 	    public void ajouterUtilisateur(Utilisateur u) {
@@ -34,14 +39,14 @@ import java.util.Scanner;
 	        return droitAcces.contains(droitRequis);
 	    }
 
-	  //creatin de compte professionnel
+	  //creatiOn de compte professionnel
 	    public void creerCompteProfessionnel() {
 	        if (!aDroit(Droit.CREER_COMPTE_PROFESSIONNEL)) {
-	            System.out.println("Vous n'avez pas le droit.");
+	            System.out.println("Vous n'avez pas le droit de créer un compte professionnel .");
 	            return;
 	        }
 
-	        System.out.println("CREATION D'UN PROFESSIONNEL");
+	        System.out.println("--- CREATION D'UN PROFESSIONNEL ---");
 
 	        String nom = saisirNomOuPrenom("Nom : ");
 	        String prenom = saisirNomOuPrenom("Pr�nom : ");
@@ -50,7 +55,7 @@ import java.util.Scanner;
 
 	        ProfessionnelSante pro = new ProfessionnelSante(nom, prenom, mdp, specialite);
 	        utilisateurs.add(pro);
-	        System.out.println("Compte cr��. ID = " + pro.getIdUtilisateur());
+	        System.out.println("Compte créé. ID = " + pro.getIdUtilisateur()  + ". \n Votre mot de passe temporaire est " + new String(mdp));
 	    }
 
 	   //modification de compte professionnel
@@ -174,4 +179,49 @@ import java.util.Scanner;
 	        }
 	        return null;
 	    }
+	    
+	    
+	    public void afficherStatistiquesSysteme() {
+	        System.out.println("\n--- 📈 RAPPORT STATISTIQUES SYSTÈME ---");
+	        
+	        try {
+	            // 1. Statistiques générales (Patients et Utilisateurs)
+	            Object statsService;
+				Map<String, Integer> statsGenerales = statsService.obtenirStatsGenerales();
+	            
+	            System.out.println("\n--- 👥 Utilisateurs et Patients ---");
+	            System.out.println("------------------------------------------");
+	            System.out.println("Total des Utilisateurs (tous rôles confondus ) : " + statsGenerales.get("TotalUtilisateurs"));
+	            System.out.println("Total des Patients enregistrés : " + statsGenerales.get("TotalPatients"));
+	            
+	            // 2. Statistiques des Professionnels de Santé par spécialité
+	            Map<String, Integer> statsProSante = statsService.compterProSanteParSpecialite();
+	            
+	            System.out.println("\n--- 👨‍⚕️ Professionnels par Catégorie ---");
+	            System.out.println("------------------------------------------");
+	            if (statsProSante.isEmpty()) {
+	                System.out.println("Aucun professionnel de santé enregistré.");
+	            } else {
+	                statsProSante.forEach((specialite, count) -> {
+	                    System.out.println(" - " + specialite + " : " + count);
+	                });
+	            }
+
+	            // 3. Statistiques des Consultations (Exemple : par statut ou par mois)
+	            // Pour l'exemple, nous allons compter les consultations terminées vs. planifiées
+	            Map<String, Integer> statsConsultations = statsService.compterConsultationsParStatut();
+	            
+	            System.out.println("\n--- 📅 État des Consultations ---");
+	            System.out.println("------------------------------------------");
+	            statsConsultations.forEach((statut, count) -> {
+	                System.out.println(" - " + statut + " : " + count);
+	            });
+	            
+	            // (Optionnel) Ajout des consultations par période
+	            // List<Map<String, Object>> consultationsParMois = statsService.obtenirConsultationsParPeriode(12);
+	            // System.out.println("\nConsultations dans les 12 derniers mois...");
+	            
+	        } catch (SQLException e) {
+	            System.err.println("❌ Erreur BDD : Impossible d'obtenir les statistiques. " + e.getMessage());
+	        }
 	}	  		

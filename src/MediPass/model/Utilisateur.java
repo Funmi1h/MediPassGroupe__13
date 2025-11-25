@@ -1,4 +1,5 @@
 package MediPass;
+import MediPass.Droit;
 
 import java.util.Base64;
 
@@ -177,11 +178,6 @@ public abstract class Utilisateur {
 	
 	public boolean getDoitChangerMdp(){
 		return doitChangerMdp;
-	}
-	
-	//setter
-	public boolean setDoitChangerMdp(boolean s) {
-		return s;
 	}
 
 }

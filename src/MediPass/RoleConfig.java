@@ -12,7 +12,8 @@ public class RoleConfig {
                     Droit.CREER_COMPTE_PROFESSIONNEL,
                     Droit.MODIFIER_COMPTE_PROFESSIONNEL,
                     Droit.SUSPENDRE_COMPTE_PROFESSIONNEL,
-                    Droit.SUPPRIMER_COMPTE_PROFESSIONNEL));
+                    Droit.SUPPRIMER_COMPTE_PROFESSIONNEL,
+                    Droit.CONSULTER_STATISTIQUES_SYSTEME));
                 
                 break;
             case "PROFESSIONNEL_SANTE":

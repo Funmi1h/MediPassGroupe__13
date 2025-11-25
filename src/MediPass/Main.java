@@ -1,8 +1,11 @@
+/*
+
 package MediPass;
 import java.sql.Connection;
 import java.util.Scanner;
 
 public class Main {
+	
 
 	public static void main(String[] args) {
 		Connection conn = SQLiteManager.connect();
@@ -53,4 +56,53 @@ public class Main {
 	    }
 		
 	}
+*/
 
+package MediPass;
+
+import java.sql.SQLException;
+import java.util.UUID;
+
+import MediPass.model.Administrateur;
+
+public class Main {
+
+    public static void main(String[] args) {
+        
+        SQLiteManager.initialiserBaseDeDonnees();
+        
+        creerAdministrateurInitial();
+        MediPassIHM ihm = new MediPassIHM();
+        ihm.demarrer(); 
+    }
+
+    /**
+     * Vérifie si l'administrateur initial existe et le crée sinon.
+     */
+    private static void creerAdministrateurInitial() {
+        
+        
+        UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
+        
+        try {
+            // Tente de trouver l'utilisateur "admin"
+            if (utilisateurDAO.trouverParIdentifiant("MainAdmin") == null) {
+                
+                System.out.println("⚠️ Création de l'administrateur initial...");
+                final char[] mdpInitial = "pass123".toCharArray();
+                
+                // Création de l'objet Administrateur
+                // Le mot de passe sera haché dans le constructeur/DAO
+                Administrateur adminInitial = new Administrateur("Main", "Admin", mdpInitial);
+                
+                
+                // Insertion dans la BDD (via le DAO)
+                utilisateurDAO.insererUtilisateur(adminInitial); 
+                
+                System.out.println("✅ Administrateur 'admin' créé avec le mot de passe temporaire 'pass123'.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur  lors de la création de l'administrateur initial: " + e.getMessage());
+        }
+    }
+}
