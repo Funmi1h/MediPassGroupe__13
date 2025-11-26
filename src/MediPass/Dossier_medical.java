@@ -2,7 +2,7 @@ import java.util.ArrayList ;
 import java.util.List ;
 import java.util.Date ;
 
-public class dossierMedical {
+public class Dossier_medical {
     private String dossierID; //Identifiant unique du Dossier_medical
     private Date dateCreation ; //date d'ouverture du dossier
 
@@ -11,7 +11,7 @@ public class dossierMedical {
                  
                  
                  //----CONSTRUCTEUR-----
-     public dossierMedical(String id) {
+     public Dossier_medical(String id) {
         this.dossierID = id ;
         this.dateCreation = new Date() ; 
 
@@ -42,7 +42,7 @@ public class dossierMedical {
     //----methode pour chercher une consultation par son ID/date----
     public Consultation searchConsultation(String idConsultation) {
         for (Consultation c : this.consultations) {
-            if (c.getidConsultation().equals(idConsultation)) {
+            if (String.valueOf(c.getidConsultation()).equals(idConsultation)) {
                 return c ; // correspond a la premiere consultation trouvee
             }
         }

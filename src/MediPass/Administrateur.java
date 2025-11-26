@@ -9,7 +9,9 @@ import java.lang;
 
 public class Administrateur extends Utilisateur {
 	
-	private Scanner scanner = new Scanner(System.in);
+	/*9 a"é'dff;
+    3
+     bnprivate Scanner scanner = new Scanner(System.in);
 
     // Déclaration et initialisation des droits
     private Set<Droit> droitAcces = new HashSet<>() ;{{
