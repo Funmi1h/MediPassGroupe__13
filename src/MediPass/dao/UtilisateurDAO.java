@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package MediPass.dao;
 
 import java.util.List;
@@ -21,4 +22,10 @@ public interface UtilisateurDAO {
 
     // Supprime un utilisateur par id
     boolean delete(String id) throws DAOException;
+=======
+package MediPass;
+
+public class UtilisateurDAO {
+
+>>>>>>> 9445065752195d6a5bac4d85321be95f6ccb0e7e
 }
