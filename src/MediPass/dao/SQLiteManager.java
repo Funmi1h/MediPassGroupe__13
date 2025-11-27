@@ -81,13 +81,16 @@ public class SQLiteManager {
         		+ "idDossier TEXT NOT NULL PRIMARY KEY,"
         		+ "dateCreation TEXT NOT NULL "
         		+ ")";
-        String sqlConsultation = "CREATE TABLE IF NOT EXISTS Consultation ("
+       String sqlConsultation = "CREATE TABLE IF NOT EXISTS Consultation ("
                 + "idConsultation TEXT PRIMARY KEY,"
                 + "numeroConsultation INTEGER UNIQUE NOT NULL,"
                 + "idDossier TEXT NOT NULL,"
-                + "idProfessionnelSante TEXT NOT NULL," 
+                + "idProfessionnelSante TEXT NOT NULL,"
+                + "dateConsultation TEXT NOT NULL,"
+                + "motif TEXT,"
+                + "statut TEXT,"
                 + "FOREIGN KEY(idDossier) REFERENCES DossierMedical(idDossier),"
-                + "FOREIGN KEY(idProfessionnelSante) REFERENCES ProfessionnelSante(idUtilisateur)" // Le lien vers le médecin
+                + "FOREIGN KEY(idProfessionnelSante) REFERENCES ProfessionnelSante(idUtilisateur)"
                 + ");";
         
         //Exécution des requetes

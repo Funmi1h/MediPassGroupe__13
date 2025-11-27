@@ -1,4 +1,4 @@
-package MediPass;
+package MediPass.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 public class Consultation {
 	Scanner sc = new Scanner(System.in);
-	private int idConsultation;
-	private int idDossier; // Une consultation est dans un seul dossier médical 
+	private String idConsultation;
+	private String idDossier; // Une consultation est dans un seul dossier médical 
 	private LocalDateTime dateHeure;
 	private String motif;
 	private Patient patient;
@@ -32,7 +32,7 @@ public class Consultation {
 	
 	 
 	
-	public Consultation(int idConsultation, LocalDateTime dateHeure, String motif, Patient patient, ProfessionnelSante pds){
+	public Consultation(String idConsultation, LocalDateTime dateHeure, String motif, Patient patient, ProfessionnelSante pds){
 		this.idConsultation = idConsultation;
 		this.dateHeure = dateHeure;
 		this.motif = motif;
@@ -42,8 +42,12 @@ public class Consultation {
 		this.observations = new ArrayList<>(); 
 	}
 	
-	public int getIdConsultation() {
+	public String getIdConsultation() {
 		return this.idConsultation;
+	}
+
+	public String getIdDossier() {
+		return this.idDossier;
 	}
 	
 	public LocalDateTime getDateHeure() {
