@@ -1,0 +1,22 @@
+package Medipass.service;
+
+public class ConsultationService {
+    private ConsultationDAO consultationDAO;
+
+    public ConsultationService(ConsultationDAO dao) {
+        this.consultationDAO = dao;
+    }
+
+    public void ajouterObservationDepuisConsole(Consultation c) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Observations: \n");
+        String obs = sc.nextLine();
+        if (!obs.isEmpty()) {
+            c.getObservations().add(obs);
+            System.out.println("Observation ajoutée.");
+            // Tu peux aussi enregistrer l'observation dans la base ici si tu veux
+        } else {
+            System.out.println("Aucune observation.");
+        }
+    }
+}

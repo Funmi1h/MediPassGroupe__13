@@ -7,9 +7,9 @@ import java.util.Scanner;
 
 
 public class Consultation {
-	Scanner sc = new Scanner(System.in);
-	private String idConsultation;
-	private String idDossier; // Une consultation est dans un seul dossier médical 
+
+	private String IdConsultation;
+	private String IdDossier;  
 	private LocalDateTime dateHeure;
 	private String motif;
 	private Patient patient;
@@ -32,8 +32,9 @@ public class Consultation {
 	
 	 
 	
-	public Consultation(String idConsultation, LocalDateTime dateHeure, String motif, Patient patient, ProfessionnelSante pds){
-		this.idConsultation = idConsultation;
+	public Consultation(String IdConsultation, String IdDossier, LocalDateTime dateHeure, String motif, Patient patient, ProfessionnelSante pds){
+		this.IdConsultation = IdConsultation;
+		this.IdDossier = IdDossier;
 		this.dateHeure = dateHeure;
 		this.motif = motif;
 		this.patient = patient;
@@ -43,11 +44,19 @@ public class Consultation {
 	}
 	
 	public String getIdConsultation() {
-		return this.idConsultation;
+		return this.IdConsultation;
 	}
 
+	public void setIdConsultation(String IdConsultation) {
+		this.IdConsultation = IdConsultation;
+	}
+	
 	public String getIdDossier() {
-		return this.idDossier;
+		return this.IdDossier;
+	}
+
+	public void setIdDossier(String IdDossier) {
+		this.IdDossier = IdDossier;
 	}
 	
 	public LocalDateTime getDateHeure() {
@@ -72,20 +81,6 @@ public class Consultation {
 	
 	public List<String> getObservations(){
 		return this.observations;
-	}
-	
-	
-	//Ajouter des observations
-	public void ajouterObservations() {
-		System.out.print("Observations: \n");
-		String obs = sc.nextLine();
-		if(!obs.isEmpty()){
-			observations.add(obs);
-			System.out.println("Observations ajoutée.");
-		}
-		else {
-			System.out.println("Aucune observation.");
-		}
 	}
 	
 	//Modifier statut

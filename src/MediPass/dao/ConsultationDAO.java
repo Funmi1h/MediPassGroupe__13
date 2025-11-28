@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import MediPass.model.Consultation;
 
@@ -19,7 +18,7 @@ public class ConsultationDAO {
         this.conn = conn;
     }
 
-    // 1️⃣ CREATE : Ajouter une consultation
+    // 1 CREATE : Ajouter une consultation
     public void ajouterConsultation(Consultation c) throws SQLException {
         String sql = "INSERT INTO Consultation (idConsultation, idDossier, idProfessionnelSante, dateConsultation, motif, statut) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -32,30 +31,32 @@ public class ConsultationDAO {
         stmt.executeUpdate();
     }
 
-    // 2️⃣ READ : Récupérer une consultation par ID
-    public Consultation getConsultationParId(int id) throws SQLException {
+    // 2 READ : Récupérer une consultation par ID
+    public Consultation getConsultationParId(String id) throws SQLException {
         String sql = "SELECT * FROM Consultation WHERE idConsultation = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setInt(1, id);
+        stmt.setString(1, String.valueOf(id));
         ResultSet rs = stmt.executeQuery();
 
         if (rs.next()) {
             LocalDateTime date = LocalDateTime.parse(rs.getString("dateConsultation"));
             Consultation c = new Consultation(
-                rs.getString("idConsultation"),
+                rs.getString("IdConsultation"),
+                rs.getString("IdDossier"),
                 date,
                 rs.getString("motif"),
                 null, // patient à charger si besoin
                 null  // professionnel à charger si besoin
             );
-			c.setIdDossier(rs.getInt("idDossier"));
+            c.setIdConsultation(rs.getString("IdConsultation"));
+            c.setIdDossier(rs.getString("IdDossier"));
             c.modifierStatut(Consultation.statuts.valueOf(rs.getString("statut")));
             return c;
         }
         return null;
     }
 
-    // 3️⃣ UPDATE : Modifier une consultation
+    // 3 UPDATE : Modifier une consultation
     public void modifierConsultation(Consultation c) throws SQLException {
         String sql = "UPDATE Consultation SET idDossier = ?, idProfessionnelSante = ?, dateConsultation = ?, motif = ?, statut = ? WHERE idConsultation = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -68,7 +69,7 @@ public class ConsultationDAO {
         stmt.executeUpdate();
     }
 
-    // 4️⃣ DELETE : Supprimer une consultation
+    // 4 DELETE : Supprimer une consultation
     public void supprimerConsultation(String id) throws SQLException {
         String sql = "DELETE FROM Consultation WHERE idConsultation = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -76,7 +77,7 @@ public class ConsultationDAO {
         stmt.executeUpdate();
     }
 
-    // 5️⃣ READ ALL : Récupérer toutes les consultations
+    // 5 READ ALL : Récupérer toutes les consultations
     public List<Consultation> getToutesLesConsultations() throws SQLException {
         List<Consultation> consultations = new ArrayList<>();
         String sql = "SELECT * FROM Consultation";
@@ -86,15 +87,16 @@ public class ConsultationDAO {
             LocalDateTime date = LocalDateTime.parse(rs.getString("dateConsultation"));
             Consultation c = new Consultation(
                 rs.getString("idConsultation"),
+                rs.getString("idDossier"),
                 date,
                 rs.getString("motif"),
                 null,
                 null
             );
-            c.setIdDossier(rs.getInt("idDossier"));
+            c.setIdConsultation(rs.getString("IdConsultation"));
+            c.setIdDossier(rs.getString("IdDossier"));
             c.modifierStatut(Consultation.statuts.valueOf(rs.getString("statut")));
             consultations.add(c);
-        }
         }
 
         return consultations;
