@@ -41,15 +41,13 @@ public class ConsultationDAO {
         if (rs.next()) {
             LocalDateTime date = LocalDateTime.parse(rs.getString("dateConsultation"));
             Consultation c = new Consultation(
-                rs.getString("IdConsultation"),
-                rs.getString("IdDossier"),
+                rs.getString("idConsultation"),
+                rs.getString("idDossier"),
                 date,
                 rs.getString("motif"),
-                null, // patient à charger si besoin
-                null  // professionnel à charger si besoin
+                null,
+                null  
             );
-            c.setIdConsultation(rs.getString("IdConsultation"));
-            c.setIdDossier(rs.getString("IdDossier"));
             c.modifierStatut(Consultation.statuts.valueOf(rs.getString("statut")));
             return c;
         }
@@ -93,8 +91,8 @@ public class ConsultationDAO {
                 null,
                 null
             );
-            c.setIdConsultation(rs.getString("IdConsultation"));
-            c.setIdDossier(rs.getString("IdDossier"));
+            c.setIdConsultation(rs.getString("idConsultation"));
+            c.setIdDossier(rs.getString("idDossier"));
             c.modifierStatut(Consultation.statuts.valueOf(rs.getString("statut")));
             consultations.add(c);
         }

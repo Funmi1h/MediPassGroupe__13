@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 public class Consultation {
 
-	private String IdConsultation;
-	private String IdDossier;  
+	private String idConsultation;
+	private String idDossier;  
 	private LocalDateTime dateHeure;
 	private String motif;
 	private Patient patient;
@@ -32,9 +32,9 @@ public class Consultation {
 	
 	 
 	
-	public Consultation(String IdConsultation, String IdDossier, LocalDateTime dateHeure, String motif, Patient patient, ProfessionnelSante pds){
-		this.IdConsultation = IdConsultation;
-		this.IdDossier = IdDossier;
+	public Consultation(String idConsultation, String idDossier, LocalDateTime dateHeure, String motif, Patient patient, ProfessionnelSante pds){
+		this.idConsultation = idConsultation;
+		this.idDossier = idDossier;
 		this.dateHeure = dateHeure;
 		this.motif = motif;
 		this.patient = patient;
@@ -44,19 +44,19 @@ public class Consultation {
 	}
 	
 	public String getIdConsultation() {
-		return this.IdConsultation;
+		return this.idConsultation;
 	}
 
-	public void setIdConsultation(String IdConsultation) {
-		this.IdConsultation = IdConsultation;
+	public void setIdConsultation(String idConsultation) {
+		this.idConsultation = idConsultation;
 	}
 	
 	public String getIdDossier() {
-		return this.IdDossier;
+		return this.idDossier;
 	}
 
-	public void setIdDossier(String IdDossier) {
-		this.IdDossier = IdDossier;
+	public void setIdDossier(String idDossier) {
+		this.idDossier = idDossier;
 	}
 	
 	public LocalDateTime getDateHeure() {
