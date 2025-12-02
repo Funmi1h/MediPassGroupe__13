@@ -93,6 +93,13 @@ public class SQLiteManager {
                 + "FOREIGN KEY(idProfessionnelSante) REFERENCES ProfessionnelSante(idUtilisateur)"
                 + ");";
         
+                String sqlObservation = "CREATE TABLE IF NOT EXISTS Observation (" 
+                + "idObservation INTEGER PRIMARY KEY AUTOINCREMENT, " 
+                + "idConsultation TEXT NOT NULL, " 
+                + "contenu TEXT NOT NULL, " 
+                + "FOREIGN KEY(idConsultation) REFERENCES Consultation(idConsultation)" 
+                + ");";
+
         //Exécution des requetes
         
         try (Connection conn = connect();
@@ -101,6 +108,7 @@ public class SQLiteManager {
         	stmt.execute(sqlProfessionnelSante);
         	stmt.execute(sqlPatient);
         	stmt.execute(sqlDossierMedical);
+            stmt.execute(sqlObservation);
         	System.out.println("Base de données initialisée avec succès. Table vérifiées")
         	
         	

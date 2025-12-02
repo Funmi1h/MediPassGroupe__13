@@ -1,5 +1,7 @@
 package Medipass.service;
 
+java.util.Scanner;
+
 public class ConsultationService {
     private ConsultationDAO consultationDAO;
 
@@ -13,10 +15,11 @@ public class ConsultationService {
         String obs = sc.nextLine();
         if (!obs.isEmpty()) {
             c.getObservations().add(obs);
-            System.out.println("Observation ajoutée.");
-            // Tu peux aussi enregistrer l'observation dans la base ici si tu veux
+            System.out.println("Observation ajoutée!");
+            consultationDAO.ajouterObservation(c.getIdConsultation(), obs);
         } else {
-            System.out.println("Aucune observation.");
+            System.out.println("Aucune observation ajoutée.");
         }
     }
+    sc.close();
 }

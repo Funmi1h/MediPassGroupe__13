@@ -3,7 +3,6 @@ package MediPass.model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 
 public class Consultation {
@@ -13,7 +12,7 @@ public class Consultation {
 	private LocalDateTime dateHeure;
 	private String motif;
 	private Patient patient;
-	private ProfessionnelSante pds;
+	private ProfessionnelSante idProfessionnelSante;
 	private statuts statut;
 	private List<String> observations;
 	
@@ -32,13 +31,13 @@ public class Consultation {
 	
 	 
 	
-	public Consultation(String idConsultation, String idDossier, LocalDateTime dateHeure, String motif, Patient patient, ProfessionnelSante pds){
+	public Consultation(String idConsultation, String idDossier, LocalDateTime dateHeure, String motif, Patient patient, ProfessionnelSante idProfessionnelSante) {
 		this.idConsultation = idConsultation;
 		this.idDossier = idDossier;
 		this.dateHeure = dateHeure;
 		this.motif = motif;
 		this.patient = patient;
-		this.pds = pds;
+		this.idProfessionnelSante = idProfessionnelSante;
 		this.statut = statuts.PLANIFIEE; //Par défaut
 		this.observations = new ArrayList<>(); 
 	}
@@ -71,8 +70,8 @@ public class Consultation {
 		return this.patient;
 	}
 	
-	public ProfessionnelSante getPds() {
-		return this.pds;
+	public ProfessionnelSante getIdProfessionnelSante() {
+		return this.idProfessionnelSante;
 	}
 	
 	public statuts getStatut() {
@@ -82,6 +81,10 @@ public class Consultation {
 	public List<String> getObservations(){
 		return this.observations;
 	}
+
+	public void setObservations(List<String> observations) {
+    this.observations = observations;
+}
 	
 	//Modifier statut
 	public void modifierStatut(statuts Nstatut){
