@@ -83,7 +83,6 @@ public class SQLiteManager {
         		+ ")";
        String sqlConsultation = "CREATE TABLE IF NOT EXISTS Consultation ("
                 + "idConsultation TEXT PRIMARY KEY,"
-                + "numeroConsultation INTEGER UNIQUE NOT NULL,"
                 + "idDossier TEXT NOT NULL,"
                 + "idProfessionnelSante TEXT NOT NULL,"
                 + "dateConsultation TEXT NOT NULL,"

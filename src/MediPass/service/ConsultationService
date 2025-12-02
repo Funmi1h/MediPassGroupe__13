@@ -1,6 +1,6 @@
-package Medipass.service;
+package MediPass.service;
 
-java.util.Scanner;
+import java.util.Scanner;
 
 public class ConsultationService {
     private ConsultationDAO consultationDAO;
@@ -21,5 +21,5 @@ public class ConsultationService {
             System.out.println("Aucune observation ajoutée.");
         }
     }
-    sc.close();
+    
 }
